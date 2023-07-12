@@ -1,0 +1,103 @@
+
+main{
+    min-height: 100%;
+}
+.bg-color {
+    background-color:  #353535;
+}
+
+.header {
+    background-color: black ;
+    min-height: 90vh;
+}
+
+.hidden{
+    display: none;
+}
+
+.header-card {
+    max-width: 40%; 
+    height: auto;
+    color: white;
+    text-align: end;
+    margin: 10%;
+    z-index: 100;
+}
+
+.article-cards{
+    min-height: 50vh;
+}
+
+legend {
+    font-size:  1.1rem !important;
+}
+
+.links-info{
+    list-style: none;
+}
+
+.links-info a{
+    text-decoration: none;
+    color: white;
+}
+.section-container{
+    min-height: calc(100vh - (86px + 56px));
+}
+
+.formContainer {
+    width: 50vw;
+}
+#containDiscounts > div {
+    transition: all 0.2s;
+}
+.card-info {
+    position: absolute;
+    text-align: center;
+    border-radius: 8px;
+    width: 340px;
+    height: 400px;
+    background-color: #fff;
+    box-shadow: 3px 3px 10px #000;
+    z-index: 100;
+    top: calc(50vh - 200px );
+    left: calc(50vw - 170px);
+}
+#containDiscounts>div:nth-child(1):hover{   
+    background-color: #0d6efd;
+}
+#containDiscounts>div:nth-child(2):hover{   
+    background-color: #198754;
+}
+#containDiscounts>div:nth-child(3):hover{   
+    background-color: #ffc107;
+}
+
+@media  screen and (max-width: 992px){
+    .header-card {
+        font-size: 0.9rem;
+        min-width: 95%;
+        text-align: center;
+        padding: 0 2%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .card-text{
+        font-size: 0.8rem;
+    }
+    .card-title {
+        font-size: 1rem;
+    }
+    legend{
+        font-size: 1rem !important;
+    }
+    .formContainer{
+        width: 90vw;
+    }
+    .section-container{
+        height: auto;
+    }
+    .card-info{
+        top: 100%;
+    }
+}
