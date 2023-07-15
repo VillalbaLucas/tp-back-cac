@@ -62,6 +62,8 @@ function buy(){
 
     if(validityInputsValues(name, lastname, tickets, inputs[3])) return alert('Ingrese datos validos')
     
+    let select = document.querySelector('#select').value
+    fetchPostTicket(inputs, select)
     const card = CardInfo(calculateQuantity(tickets), inputs)
     viewInfoCard(card)
     form.querySelector('#btnBuy').disabled = true;
@@ -129,3 +131,4 @@ const toggleBg = (e) => {
     currentTarget.classList.add(colors[currentTarget.dataset.id])
 }
 
+console.log('Holaaaaa')

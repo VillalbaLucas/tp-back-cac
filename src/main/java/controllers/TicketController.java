@@ -44,6 +44,7 @@ public class TicketController extends HttpServlet {
         try{
             System.out.println("Ticket GET Controller;");
             System.out.println(ticketServ.getTickets());
+            sendJson(response, ticketServ.getTickets());
         }catch(Exception e){
             System.out.print(e.toString());
         }
@@ -78,6 +79,13 @@ public class TicketController extends HttpServlet {
         return scanner.hasNext() 
                 ? scanner.useDelimiter("\\A").next()
                 : "";
+    }
+    private void sendJson(HttpServletResponse res, String json) throws IOException {
+        PrintWriter out = res.getWriter();
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+        out.print(json);
+        out.flush();
     }
 
 }

@@ -9,7 +9,7 @@ function fetchPostTicket(inputs, select){
         lastname: inputs[1].value,
         email: inputs[2].value,
         quantity: inputs[3].value,
-        category: select.value
+        category: select
     }
     const config = {
         method : 'POST',
@@ -20,9 +20,9 @@ function fetchPostTicket(inputs, select){
             .catch(err => console.log(err)));
 }
 
-//function fetchGetTicket(){
-//    fetch('/api/ticket', {method:'get'})
-//            .then(res => res.json())
-//            .then(data => console.log(data))
-//}
+function fetchGetTicket(){
+    fetch('/api/ticket')
+            .then(res => res.json())
+            .then(data => console.log(data))
+}
 
