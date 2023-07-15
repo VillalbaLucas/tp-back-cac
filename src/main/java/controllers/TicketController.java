@@ -42,6 +42,7 @@ public class TicketController extends HttpServlet {
             throws ServletException, IOException {
         
         try{
+            System.out.println("Ticket GET Controller;");
             System.out.println(ticketServ.getTickets());
         }catch(Exception e){
             System.out.print(e.toString());

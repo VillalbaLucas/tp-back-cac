@@ -64,7 +64,7 @@ function buy(){
     
     const card = CardInfo(calculateQuantity(tickets), inputs)
     viewInfoCard(card)
-    form.querySelector('#btnBuy').disabled = true
+    form.querySelector('#btnBuy').disabled = true;
 }
 
 function calculateQuantity(tickets){
