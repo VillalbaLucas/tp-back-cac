@@ -19,7 +19,8 @@ import services.TicketService;
 public class TicketController extends HttpServlet {
     
     private static final TicketService ticketServ = TicketService.getInstance();
-
+    private Boolean statusOk = null;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -42,11 +43,19 @@ public class TicketController extends HttpServlet {
             throws ServletException, IOException {
         
         try{
-            System.out.println("Ticket GET Controller;");
-            System.out.println(ticketServ.getTickets());
+            System.out.println("Get Controller");
+            response.sendRedirect("./../views/ticket.html");
             sendJson(response, ticketServ.getTickets());
+            statusOk = true;
+            
         }catch(Exception e){
             System.out.print(e.toString());
+            statusOk = false;
+        }finally{
+            if(statusOk)
+                response.setStatus(HttpServletResponse.SC_OK);
+            else
+                response.setStatus(SC_NOT_FOUND);
         }
         
     }
@@ -54,15 +63,15 @@ public class TicketController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Boolean respuesta = null;
+        
         String body = bodyToString(request.getInputStream());
         try {
-            respuesta = ticketServ.postTicket(body);
+            statusOk = ticketServ.postTicket(body);
         } catch (Exception ex) {
             System.err.print("ERROR, Exception in TicketController" + ex.toString());
-            respuesta = false;
+            statusOk = false;
         }finally{
-            if(respuesta)
+            if(statusOk)
                 response.setStatus(SC_CREATED);
             else
                 response.setStatus(SC_NOT_FOUND);

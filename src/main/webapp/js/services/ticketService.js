@@ -20,9 +20,12 @@ function fetchPostTicket(inputs, select){
             .catch(err => console.log(err)));
 }
 
+ const $btnAdmin = $('#btnAdmin')
+
 function fetchGetTicket(){
     fetch('/api/ticket')
             .then(res => res.json())
             .then(data => console.log(data))
 }
+$btnAdmin.AddEventListener('click', fetchGetTicket)
 
