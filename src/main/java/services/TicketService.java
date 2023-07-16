@@ -30,4 +30,10 @@ public class TicketService {
         return ticketsJson;
     }
     
+    public void deletTicket(String id) throws Exception{
+        Long idLong = Long.parseLong(id.substring(1));
+        System.out.println("IDLONG: "+idLong);
+        ticketDao.deletTicket(idLong);
+    }
+    
 }

@@ -3,8 +3,10 @@
     article.id = 'formMain'
 
     article.innerHTML = `
-        <button id="btnAdmin" type="button" class="btn border rounded-1 m-2">Administrar</button>
-
+        <div class="m-vw-25">
+            <button onClick="redirectGetTicket()" type="submit" class="btn border rounded-1 m-2 mx-3">Administrar</button>
+            <p class="py-1 opacity-50 fs-6">*Solo para administradores del sitio*</p>
+        </div>
         <section class="d-flex flex-column align-items-center section-container py-5">
             <div class="d-flex flex-column align-items-center">
                 <div id="containDiscounts" class="d-flex flex-column flex-md-row gap-3">

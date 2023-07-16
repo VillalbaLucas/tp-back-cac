@@ -8,23 +8,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 /**
  *
  * @author Andrea
  */
-@WebServlet(name = "HelloController", urlPatterns = {"/hello"})
-public class HelloController extends HttpServlet {
+@WebServlet(name = "HelloController", urlPatterns = {"/api/administrar"})
+public class ViewController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private Boolean statusOk = null;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -43,9 +36,22 @@ public class HelloController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+       protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        try{
+            response.sendRedirect("./../views/ticket.jsp");
+            statusOk = true;
+            
+        }catch(Exception e){
+            System.out.print(e.toString());
+            statusOk = false;
+        }finally{
+            if(statusOk)
+                response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+            else
+                response.setStatus(SC_NOT_FOUND);
+        } 
     }
 
     @Override

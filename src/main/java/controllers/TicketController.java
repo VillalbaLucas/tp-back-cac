@@ -1,6 +1,7 @@
 
 package controllers;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,11 +16,12 @@ import java.io.InputStream;
 import java.util.Scanner;
 import services.TicketService;
 
-@WebServlet(name = "TicketController", urlPatterns = {"/api/ticket"})
+@WebServlet(name = "TicketController", urlPatterns = {"/api/ticket", "/api/ticket/*"})
 public class TicketController extends HttpServlet {
     
     private static final TicketService ticketServ = TicketService.getInstance();
     private Boolean statusOk = null;
+    private static final Gson GSON = new Gson();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,8 +45,6 @@ public class TicketController extends HttpServlet {
             throws ServletException, IOException {
         
         try{
-            System.out.println("Get Controller");
-            response.sendRedirect("./../views/ticket.html");
             sendJson(response, ticketServ.getTickets());
             statusOk = true;
             
@@ -56,8 +56,7 @@ public class TicketController extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_OK);
             else
                 response.setStatus(SC_NOT_FOUND);
-        }
-        
+        } 
     }
 
     @Override
@@ -78,6 +77,26 @@ public class TicketController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest req,
+            HttpServletResponse resp
+            ) throws ServletException, IOException {
+        try {
+            ticketServ.deletTicket(req.getPathInfo());
+            statusOk = true;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            statusOk = false;
+        }finally{
+            if(statusOk)
+                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            else
+                resp.setStatus(SC_NOT_FOUND);
+        }
+    }
+    
+    
+    
     @Override
     public String getServletInfo() {
         return "Short description";

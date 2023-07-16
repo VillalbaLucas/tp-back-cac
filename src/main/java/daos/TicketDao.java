@@ -61,4 +61,16 @@ public class TicketDao{
             return false;
         }
     }
+    
+    public void deletTicket(Long id) throws Exception{
+        ps = connect.prepareStatement("DELETE FROM tickets WHERE id=?");
+        
+        try {
+            ps.setLong(1, id);
+            ps.execute();
+        }catch(SQLException e) {
+                System.out.println(e.toString());
+        }
+    }
+        
 }

@@ -20,12 +20,29 @@ function fetchPostTicket(inputs, select){
             .catch(err => console.log(err)));
 }
 
- const $btnAdmin = $('#btnAdmin')
+function redirectGetTicket(){
+    fetch("/api/administrar")
+            .then(res => {
+                const redirect = res.url
+                window.location.href = redirect
+            }
+        )
+        .catch(err)
+            console.log(err)
+}
 
-function fetchGetTicket(){
-    fetch('/api/ticket')
+function getTickets(){
+    fetch("/api/ticket")
             .then(res => res.json())
             .then(data => console.log(data))
 }
-$btnAdmin.AddEventListener('click', fetchGetTicket)
+
+function deletTicket(id){
+    fetch(`/api/ticket/${id}`, {method: 'DELETE'})
+            .then(() => {
+                location.reload()
+            })
+            .catch(err)
+                console.log(err)
+}
 

@@ -130,5 +130,3 @@ const toggleBg = (e) => {
     prevId = currentTarget.dataset.id
     currentTarget.classList.add(colors[currentTarget.dataset.id])
 }
-
-console.log('Holaaaaa')
