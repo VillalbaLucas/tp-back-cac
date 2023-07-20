@@ -1,7 +1,3 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
- */
 
 function fetchPostTicket(inputs, select){
     const ticket = {
@@ -21,7 +17,7 @@ function fetchPostTicket(inputs, select){
 }
 
 function redirectGetTicket(){
-    fetch("/api/administrar")
+    fetch("/administrar")
             .then(res => {
                 const redirect = res.url
                 window.location.href = redirect
@@ -44,5 +40,16 @@ function deletTicket(id){
             })
             .catch(err)
                 console.log(err)
+}
+
+function redirectPutTicket(id){
+    fetch("/administrar", {method:'PUT', body: JSON.stringify(id.toString()) })
+            .then(res => {
+                const url = res.url
+               console.log(url)
+            })
+}
+function putTicket(){
+    
 }
 

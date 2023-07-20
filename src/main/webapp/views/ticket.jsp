@@ -48,6 +48,7 @@
                         <td><%= t.getFecha() %></td>
                         <td>
                             <button class="btn btn-danger" onClick="deletTicket(<%= t.getId()%>)" >Borrar</button>
+                            <button class="btn btn-primary" onClick="redirectPutTicket(<%= t.getId()%>)" >Editar</button>
                         </td>
                         
                     </tr>

@@ -10,8 +10,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h2>Hello World!</h2>
-        <section>
+        <h2 class="bg-color p-3 text-center  text-light">Formulario para editar ticket</h2>
+        <section class="container-fluid d-flex justify-content-center py-5 my-5">
             <form name="formulario" class="formContainer">
                 <div class="row row-cols-md-2 px-2">
                     <div class="col-12 form-floating mb-3 px-1">
@@ -33,9 +33,9 @@
                         <input type="number" value="1" class="form-control" required>
                     </div>
                 </div>
-                <div class="row row-cols-3 justify-content-around">
+                <div class="row row-cols-3 my-5 justify-content-around">
                     <button type="reset" class="btn btn-success" onclick="emptyInputs()" >Borrar</button>
-                    <button id="btnBuy" type="button" class="btn btn-success" disabled onclick="buy()" ></i>Guardar</button>
+                <button id="btnBuy" type="button" class="btn btn-primary" disabled onclick="putTicket()" ></i>Guardar</button>
                 </div>
             </form>
         </section>

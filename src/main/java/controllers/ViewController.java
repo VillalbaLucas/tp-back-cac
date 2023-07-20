@@ -1,6 +1,7 @@
 
 package controllers;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +15,7 @@ import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
  *
  * @author Andrea
  */
-@WebServlet(name = "HelloController", urlPatterns = {"/api/administrar"})
+@WebServlet(name = "HelloController", urlPatterns = {"/administrar"})
 public class ViewController extends HttpServlet {
 
     private Boolean statusOk = null;
@@ -59,6 +60,30 @@ public class ViewController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
+    @Override
+    protected void doPut(HttpServletRequest request,
+            HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+           try{
+               RequestDispatcher dispacher = request.getRequestDispatcher("./../views/ticket-modify.jsp");
+               System.out.println("dispacher"+ dispacher);
+               dispacher.forward(request, response);
+               statusOk = true;
+            
+        }catch(Exception e){
+            System.out.print(e.toString());
+            statusOk = false;
+        }finally{
+            if(statusOk)
+                response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+            else
+                response.setStatus(SC_NOT_FOUND);
+        } 
+    }
+    
+    
 
     @Override
     public String getServletInfo() {
