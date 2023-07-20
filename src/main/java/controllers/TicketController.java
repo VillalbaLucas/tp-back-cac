@@ -1,4 +1,3 @@
-
 package controllers;
 
 import com.google.gson.Gson;
@@ -18,11 +17,11 @@ import services.TicketService;
 
 @WebServlet(name = "TicketController", urlPatterns = {"/api/ticket", "/api/ticket/*"})
 public class TicketController extends HttpServlet {
-    
+
     private static final TicketService ticketServ = TicketService.getInstance();
     private Boolean statusOk = null;
     private static final Gson GSON = new Gson();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -31,7 +30,7 @@ public class TicketController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TicketController</title>");            
+            out.println("<title>Servlet TicketController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet TicketController at " + request.getContextPath() + "</h1>");
@@ -43,71 +42,89 @@ public class TicketController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try{
+
+        try {
             sendJson(response, ticketServ.getTickets());
             statusOk = true;
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             System.out.print(e.toString());
             statusOk = false;
-        }finally{
-            if(statusOk)
+        } finally {
+            if (statusOk) {
                 response.setStatus(HttpServletResponse.SC_OK);
-            else
+            } else {
                 response.setStatus(SC_NOT_FOUND);
-        } 
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String body = bodyToString(request.getInputStream());
         try {
-            statusOk = ticketServ.postTicket(body);
+            ticketServ.postTicket(body);
+            statusOk = true;
         } catch (Exception ex) {
             System.err.print("ERROR, Exception in TicketController" + ex.toString());
             statusOk = false;
-        }finally{
-            if(statusOk)
+        } finally {
+            if (statusOk) {
                 response.setStatus(SC_CREATED);
-            else
+            } else {
                 response.setStatus(SC_NOT_FOUND);
+            }
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req,
             HttpServletResponse resp
-            ) throws ServletException, IOException {
+    ) throws ServletException, IOException {
         try {
             ticketServ.deletTicket(req.getPathInfo());
             statusOk = true;
         } catch (Exception e) {
             System.out.println(e.toString());
             statusOk = false;
-        }finally{
-            if(statusOk)
+        } finally {
+            if (statusOk) {
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            else
+            } else {
                 resp.setStatus(SC_NOT_FOUND);
+            }
         }
     }
-    
-    
-    
+
+    @Override
+    protected void doPut(
+            HttpServletRequest req,
+            HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        String body = bodyToString(req.getInputStream());          
+        try {
+            ticketServ.modifyTicket(body);       
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
-     private String bodyToString(InputStream inputStream){
+    private String bodyToString(InputStream inputStream) {
         Scanner scanner = new Scanner(inputStream, "UTF-8");
-        return scanner.hasNext() 
+        return scanner.hasNext()
                 ? scanner.useDelimiter("\\A").next()
                 : "";
     }
+
     private void sendJson(HttpServletResponse res, String json) throws IOException {
         PrintWriter out = res.getWriter();
         res.setContentType("application/json");

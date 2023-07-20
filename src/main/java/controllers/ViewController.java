@@ -66,21 +66,21 @@ public class ViewController extends HttpServlet {
             HttpServletResponse response) 
             throws ServletException, IOException {
         
-           try{
-               RequestDispatcher dispacher = request.getRequestDispatcher("./../views/ticket-modify.jsp");
-               System.out.println("dispacher"+ dispacher);
-               dispacher.forward(request, response);
-               statusOk = true;
-            
-        }catch(Exception e){
-            System.out.print(e.toString());
-            statusOk = false;
-        }finally{
-            if(statusOk)
-                response.setStatus(HttpServletResponse.SC_SEE_OTHER);
-            else
-                response.setStatus(SC_NOT_FOUND);
-        } 
+//           try{
+//               RequestDispatcher dispacher = request.getRequestDispatcher("./../views/ticket-modify.jsp");
+//               System.out.println("dispacher"+ dispacher);
+//               dispacher.forward(request, response);
+//               statusOk = true;
+//            
+//        }catch(Exception e){
+//            System.out.print(e.toString());
+//            statusOk = false;
+//        }finally{
+//            if(statusOk)
+//                response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+//            else
+//                response.setStatus(SC_NOT_FOUND);
+//        } 
     }
     
     

@@ -17,23 +17,30 @@ public class TicketService {
         return instance;
     }
     
-    public Boolean postTicket(String ticket) throws SQLException, Exception{
-        Ticket newTicket = GSON.fromJson(ticket, Ticket.class);
-        Boolean response = ticketDao.postTicket(newTicket);
-        return response; 
+    public void postTicket(String body) throws SQLException, Exception{ 
+        ticketDao.postTicket(parseTicket(body));
     }
     
     public String getTickets() throws Exception{
         List<Ticket> tickets = ticketDao.getTickets();
         String ticketsJson = GSON.toJson(tickets);
-//        System.out.println("\nTicketService:\n"+tickets);
         return ticketsJson;
     }
     
     public void deletTicket(String id) throws Exception{
-        Long idLong = Long.parseLong(id.substring(1));
-        System.out.println("IDLONG: "+idLong);
-        ticketDao.deletTicket(idLong);
+        ticketDao.deletTicket(parseId(id));
+    }
+    
+    public void modifyTicket(String body) throws SQLException{
+        ticketDao.modifyTicket(parseTicket(body));
+    }
+    
+    private Ticket parseTicket(String body){
+        return GSON.fromJson(body, Ticket.class);
+    }
+    
+    private Long parseId(String id){
+        return Long.valueOf(id.substring(1));
     }
     
 }
