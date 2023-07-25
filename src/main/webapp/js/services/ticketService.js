@@ -1,4 +1,3 @@
-
 function fetchPostTicket(inputs, select){
     const ticket = {
         name: inputs[0].value,
@@ -41,15 +40,6 @@ function deletTicket(id){
             .catch(err)
                 console.log(err)
 }
-
-function redirectPutTicket(id){
-    fetch("/administrar", {method:'PUT', body: JSON.stringify(id.toString()) })
-            .then(res => {
-                const url = res.url
-               console.log(url)
-            })
+function redirectTicketModify(id){
+    window.location.href = './ticket-modify.jsp?id=' + encodeURIComponent(id)
 }
-function putTicket(){
-    
-}
-

@@ -47,21 +47,18 @@
                         <td><%= t.getCategory() %></td>
                         <td><%= t.getFecha() %></td>
                         <td>
+                            <button class="btn btn-info" onClick="redirectTicketModify(<%= t.getId()%>)" >Modificar</button>
                             <button class="btn btn-danger" onClick="deletTicket(<%= t.getId()%>)" >Borrar</button>
-                            <button class="btn btn-primary" onClick="redirectPutTicket(<%= t.getId()%>)" >Editar</button>
-                        </td>
-                        
+                        </td>                    
                     </tr>
                     <%}%>
                 </tbody>
             </table>
         </article>
     </section>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-        <script src="./../js/services/ticketService.js"></script>
+    <script src="./../js/services/ticketService.js"></script>
 </body>
 </html>
